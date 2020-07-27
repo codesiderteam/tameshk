@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::namespace('Api\v1')->prefix('v1')->group(function(){
+Route::namespace('Api\v1')->prefix('v1')->group(function() {
+
     Route::post('register', 'RegisterController@store');
     Route::post('login', 'LoginController@login');
 
