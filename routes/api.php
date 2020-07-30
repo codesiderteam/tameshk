@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 // routes authentication
 Route::namespace('Auth')->group(function() {
     Route::post("/auth", "AuthenticateController")->name("authenticate");
+    Route::post("/logout", "LogoutController")->name('logout');
 });

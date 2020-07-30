@@ -8,7 +8,13 @@ use App\Models\User;
 
 class UserRepository implements UserRepositoryContract
 {
-
+    /**
+     * check user exist and registerd if false
+     * true update only token
+     *
+     * @param string $mobile
+     * @return array user data
+     */
     public function registerOrLogin(string $mobile): array
     {
         $user = User::where("mobile", $mobile)->first();
@@ -22,14 +28,20 @@ class UserRepository implements UserRepositoryContract
         return $this->updateUserData($user);
     }
 
+    /**
+     * store new user with mobile
+     * create new token
+     *
+     * @param string $mobile
+     * @return array user data
+     */
     public function storeUserData(string $newUserMobile): array
     {
         $newUser = User::create([
             "mobile" => $newUserMobile
         ]);
 
-        $newUser->createToken('accessToken');
-        $token = $newUser->plainTextToken;
+        $token = $newUser->createToken('access_token')->plainTextToken;
 
         $payload = [
             "user" => $newUser,
@@ -39,6 +51,13 @@ class UserRepository implements UserRepositoryContract
         return $payload;
     }
 
+    /**
+     * Update user token and
+     * delete old tokens
+     *
+     * @param string $mobile
+     * @return array user data
+     */
     public function updateUserData(User $user): array
     {
         // delete perviuos user tokens
@@ -49,7 +68,7 @@ class UserRepository implements UserRepositoryContract
 
         $payload = [
             "user" => $user,
-            "token" => $token
+            "token" => $token,
         ];
 
         return $payload;

@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Contracts\Repositories\UserRepositoryContract;
+use GuzzleHttp\Psr7\Request;
 
 class AuthenticateController extends Controller
 {
-    private $userRepository;
+    /**
+     * @var $userRepository
+     */
+    private UserRepositoryContract $userRepository;
 
-    protected function __construct(UserRepositoryContract $userRepository)
+    public function __construct(UserRepositoryContract $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -36,10 +40,13 @@ class AuthenticateController extends Controller
      */
     public function __invoke(AuthRequest $request)
     {
-        // Send Sms First call event
+        // Retrieve the validated input data...
+        $validated = $request->validated();
+
+        // TODO... Send Sms First call event
 
         // check user
-        $data = $this->handleUserAuth($request->mobile);
+        $data = $this->handleUserAuth($validated['mobile']);
 
         return response()->json($data, 200);
     }
