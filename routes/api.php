@@ -14,13 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 // routes authentication
 Route::namespace('Auth')->group(function() {
-
-    Route::post("/register", "AuthenticateController")->name("authenticate");
-
+    Route::post("/auth", "AuthenticateController")->name("authenticate");
 });

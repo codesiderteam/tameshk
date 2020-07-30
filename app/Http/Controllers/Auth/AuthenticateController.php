@@ -21,9 +21,9 @@ class AuthenticateController extends Controller
      * @param array $data
      * @return array $user
      */
-    public function checkUserExist(string $mobile)
+    public function handleUserAuth(string $mobile)
     {
-        return $this->userRepository->isUserRegistered($mobile);
+        return $this->userRepository->registerOrLogin($mobile);
     }
 
     /**
@@ -39,8 +39,8 @@ class AuthenticateController extends Controller
         // Send Sms First call event
 
         // check user
-        $user = $this->checkUserExist($request->mobile);
+        $data = $this->handleUserAuth($request->mobile);
 
-        return response()->json($user, 200);
+        return response()->json($data, 200);
     }
 }

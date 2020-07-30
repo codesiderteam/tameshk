@@ -2,9 +2,11 @@
 
 namespace App\Contracts\Repositories;
 
+use App\Models\User;
+
 interface UserRepositoryContract
 {
-    public function isUserRegistered(string $data): bool;
-    public function storeUserData(array $data): array;
-    public function updateUserData(array $data): array;
+    public function registerOrLogin(string $mobile): array;
+    public function storeUserData(string $newUserMobile): array;
+    public function updateUserData(User $user): array;
 }
