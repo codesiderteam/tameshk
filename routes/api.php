@@ -19,3 +19,9 @@ Route::namespace('Auth')->group(function() {
     Route::post("/auth", "AuthenticateController")->name("authenticate");
     Route::post("/logout", "LogoutController")->name('logout');
 });
+
+Route::namespace("Api")->group(function () {
+
+    Route::resource('/restaurants', 'RestaurantController');
+
+});

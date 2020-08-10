@@ -14,20 +14,20 @@ class CreateRestaurantsTable extends Migration
     public function up()
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
             $table->string('name');
             $table->string('brand_name');
-            $table->string('brand_name_en');
-            $table->string('logo');
-            $table->string("email");
+            $table->string('brand_name_en')->nullable();;
+            $table->string("email")->nullable();
             $table->string('mobile');
-            $table->string('type');
-            $table->string('type_en');
-            $table->string('type_item');
-            $table->string('type_item_en');
-            $table->string('link');
-            $table->text('description');
+
+            $table->unsignedBigInteger('type_id');
+            $table->unsignedInteger('type_item_id');
+
             $table->text('location');
+            $table->string('link');
+            $table->text('description')->nullable();;
+            $table->longText('logo')->nullable();
             $table->timestamps();
         });
     }

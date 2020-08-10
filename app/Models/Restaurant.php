@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\CustomModel;
 
-class Restaurant extends Model
+class Restaurant extends CustomModel
 {
     /**
      * The table associated with the model.
@@ -21,7 +21,16 @@ class Restaurant extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        "name", 'location', "type", 'image', 'link', 'typeItem',
-        'brand_name', "email", "mobile"
+        "name",
+        'brand_name',
+        'brand_name_en',
+        'location',
+        "type",
+        "type_item",
+        'logo',
+        'link',
+        "email",
+        "mobile",
+        "description"
     ];
 }
